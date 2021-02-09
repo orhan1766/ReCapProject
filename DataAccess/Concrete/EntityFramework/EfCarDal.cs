@@ -14,8 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (RentACarContext context = new RentACarContext())
             {
-                var addedCar = context.Entry(entity);
-                addedCar.State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                context.Cars.Add(entity);
                 context.SaveChanges();
             }
         }
