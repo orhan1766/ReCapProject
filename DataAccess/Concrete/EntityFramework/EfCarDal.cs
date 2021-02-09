@@ -12,21 +12,17 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Car entity)
         {
-            if (entity.Description.Length>=2 && entity.DailyPrice>0)
+            using (RentACarContext context = new RentACarContext())
             {
-                using (RentACarContext context = new RentACarContext())
-                {
-                    var addedCar = context.Entry(entity);
-                    addedCar.State = Microsoft.EntityFrameworkCore.EntityState.Added;
-                    context.SaveChanges();
-                }
+                var addedCar = context.Entry(entity);
+                addedCar.State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                context.SaveChanges();
             }
-            
         }
 
         public void Delete(Car entity)
         {
-            using (RentACarContext context=new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 var deletedCar = context.Entry(entity);
                 deletedCar.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
@@ -36,7 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Car Get(Expression<Func<Car, bool>> filter)
         {
-            using (RentACarContext context=new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 return context.Set<Car>().SingleOrDefault(filter);
             }
