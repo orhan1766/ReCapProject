@@ -30,30 +30,34 @@ namespace ConsoleUI
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
 
-            carManager.Add(car1);
-            brandManager.Add(brand1);
-            colorManager.Add(color1);
+            //carManager.Add(car1);
+            //brandManager.Add(brand1);
+            //colorManager.Add(color1);
 
-            carManager.Add(car2);
-            brandManager.Add(brand2);
-            colorManager.Add(color2);
+            //carManager.Add(car2);
+            //brandManager.Add(brand2);
+            //colorManager.Add(color2);
 
-            carManager.Add(car3);
-            brandManager.Add(brand3);
-            colorManager.Add(color3);
+            //carManager.Add(car3);
+            //brandManager.Add(brand3);
+            //colorManager.Add(color3);
 
-            carManager.Add(car4);
-            brandManager.Add(brand4);
-            colorManager.Add(color4);
+            //carManager.Add(car4);
+            //brandManager.Add(brand4);
+            //colorManager.Add(color4);
 
-            foreach (var car in carManager.GetAll())
+            var result1 = carManager.GetAll();
+
+            foreach (var car in result1.Data)
             {
                 Console.WriteLine(car.CarName+" / "+car.Description);
             }
 
             //carManager.Delete(new Car { Id=1});
 
-            foreach (var detail in carManager.GetCarDetail())
+            var result2 = carManager.GetCarDetail();
+
+            foreach (var detail in result2.Data)
             {
                 Console.WriteLine(detail.CarName + " / " +detail.BrandName + " / " +detail.ColorName + " / " +detail.DailyPrice);
             }
