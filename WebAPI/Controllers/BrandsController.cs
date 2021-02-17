@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentalsController : ControllerBase
+    public class BrandsController : ControllerBase
     {
-        IRentalService _rentalService;
+        IBrandService _brandService;
 
-        public RentalsController(IRentalService rentalService)
+        public BrandsController(IBrandService brandService)
         {
-            _rentalService = rentalService;
+            _brandService = brandService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            var result = _brandService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -31,10 +31,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyrentalid")]
-        public IActionResult GetByRentalId(int id)
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
         {
-            var result = _rentalService.GetByRentalId(id);
+            var result = _brandService.Get(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,24 +43,29 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Rental rental)
+        public ActionResult Add(Brand brand)
         {
-            var result = _rentalService.Add(rental);
+            var result = _brandService.Add(brand);
             if (result.Success)
-            {
                 return Ok(result);
-            }
             return BadRequest(result);
         }
 
         [HttpPut("delete")]
-        public IActionResult Delete(Rental rental)
+        public ActionResult Delete(Brand brand)
         {
-            var result = _rentalService.Delete(rental);
+            var result = _brandService.Delete(brand);
             if (result.Success)
-            {
                 return Ok(result);
-            }
+            return BadRequest(result);
+        }
+
+        [HttpPut("update")]
+        public ActionResult Update(Brand brand)
+        {
+            var result = _brandService.Update(brand);
+            if (result.Success)
+                return Ok(result);
             return BadRequest(result);
         }
     }

@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentalsController : ControllerBase
+    public class ColorsController : ControllerBase
     {
-        IRentalService _rentalService;
+        IColorService _colorService;
 
-        public RentalsController(IRentalService rentalService)
+        public ColorsController(IColorService colorService)
         {
-            _rentalService = rentalService;
+            _colorService = colorService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            var result = _colorService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -31,10 +31,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyrentalid")]
-        public IActionResult GetByRentalId(int id)
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
         {
-            var result = _rentalService.GetByRentalId(id);
+            var result = _colorService.Get(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,24 +43,29 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Rental rental)
+        public ActionResult Add(Color color)
         {
-            var result = _rentalService.Add(rental);
+            var result = _colorService.Add(color);
             if (result.Success)
-            {
                 return Ok(result);
-            }
             return BadRequest(result);
         }
 
         [HttpPut("delete")]
-        public IActionResult Delete(Rental rental)
+        public ActionResult Delete(Color color)
         {
-            var result = _rentalService.Delete(rental);
+            var result = _colorService.Delete(color);
             if (result.Success)
-            {
                 return Ok(result);
-            }
+            return BadRequest(result);
+        }
+
+        [HttpPut("update")]
+        public ActionResult Update(Color color)
+        {
+            var result = _colorService.Update(color);
+            if (result.Success)
+                return Ok(result);
             return BadRequest(result);
         }
     }

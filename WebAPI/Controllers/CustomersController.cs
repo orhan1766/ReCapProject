@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentalsController : ControllerBase
+    public class CustomersController : ControllerBase
     {
-        IRentalService _rentalService;
+        ICustomerService _customerService;
 
-        public RentalsController(IRentalService rentalService)
+        public CustomersController(ICustomerService customerService)
         {
-            _rentalService = rentalService;
+            _customerService = customerService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            var result = _customerService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -31,10 +31,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyrentalid")]
-        public IActionResult GetByRentalId(int id)
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
         {
-            var result = _rentalService.GetByRentalId(id);
+            var result = _customerService.GetByCustomerId(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,24 +43,29 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Rental rental)
+        public ActionResult Add(Customer customer)
         {
-            var result = _rentalService.Add(rental);
+            var result = _customerService.Add(customer);
             if (result.Success)
-            {
                 return Ok(result);
-            }
             return BadRequest(result);
         }
 
         [HttpPut("delete")]
-        public IActionResult Delete(Rental rental)
+        public ActionResult Delete(Customer customer)
         {
-            var result = _rentalService.Delete(rental);
+            var result = _customerService.Delete(customer);
             if (result.Success)
-            {
                 return Ok(result);
-            }
+            return BadRequest(result);
+        }
+
+        [HttpPut("update")]
+        public ActionResult Update(Customer customer)
+        {
+            var result = _customerService.Update(customer);
+            if (result.Success)
+                return Ok(result);
             return BadRequest(result);
         }
     }

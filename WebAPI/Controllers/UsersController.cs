@@ -31,6 +31,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
+        {
+            var result = _userService.GetByUserId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("add")]
         public ActionResult Add(User user)
         {
@@ -40,10 +51,19 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpDelete("delete")]
+        [HttpPut("delete")]
         public ActionResult Delete(User user)
         {
             var result = _userService.Delete(user);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpPut("update")]
+        public ActionResult Update(User user)
+        {
+            var result = _userService.Update(user);
             if (result.Success)
                 return Ok(result);
             return BadRequest(result);
