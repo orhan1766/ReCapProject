@@ -20,13 +20,6 @@ namespace WebAPI.Controllers
             _carService = carService;
         }
 
-        IBrandService _brandService;
-
-        public CarsController(IBrandService brandService)
-        {
-            _brandService = brandService;
-        }
-
         [HttpGet("getall")]
         public IActionResult GetAll()
         {

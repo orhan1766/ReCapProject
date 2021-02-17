@@ -30,6 +30,8 @@ namespace ConsoleUI
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
 
+            //carManager.Add(new Car { BrandId = 7, ColorId = 4, CarName = "Skoda Octavia", DailyPrice = 180, ModelYear = 2019, Description = "Duz Vites" });
+
             //carManager.Add(car1);
             //brandManager.Add(brand1);
             //colorManager.Add(color1);
@@ -46,21 +48,21 @@ namespace ConsoleUI
             //brandManager.Add(brand4);
             //colorManager.Add(color4);
 
-            var result1 = carManager.GetAll();
+            //var result1 = carManager.GetAll();
 
-            foreach (var car in result1.Data)
-            {
-                Console.WriteLine(car.CarName+" / "+car.Description);
-            }
+            //foreach (var car in result1.Data)
+            //{
+            //    Console.WriteLine(car.CarName+" / "+car.Description);
+            //}
 
             //carManager.Delete(new Car { Id=1});
 
-            var result2 = carManager.GetCarDetail();
+            //var result2 = carManager.GetCarDetail();
 
-            foreach (var detail in result2.Data)
-            {
-                Console.WriteLine(detail.CarName + " / " +detail.BrandName + " / " +detail.ColorName + " / " +detail.DailyPrice);
-            }
+            //foreach (var detail in result2.Data)
+            //{
+            //    Console.WriteLine(detail.CarName + " / " +detail.BrandName + " / " +detail.ColorName + " / " +detail.DailyPrice);
+            //}
         }
     }
 }
