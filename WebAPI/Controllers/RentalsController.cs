@@ -11,19 +11,30 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class RentalsController : ControllerBase
     {
-        IUserService _userService;
+        IRentalService _rentalService;
 
-        public UsersController(IUserService userService)
+        public RentalsController(IRentalService rentalService)
         {
-            _userService = userService;
+            _rentalService = rentalService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _userService.GetAll();
+            var result = _rentalService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbyrentalid")]
+        public IActionResult GetByRentalId(int id)
+        {
+            var result = _rentalService.GetByRentalId(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -32,22 +43,25 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public ActionResult Add(User user)
+        public IActionResult Add(Rental rental)
         {
-            var result = _userService.Add(user);
+            var result = _rentalService.Add(rental);
             if (result.Success)
+            {
                 return Ok(result);
+            }
             return BadRequest(result);
         }
 
         [HttpDelete("delete")]
-        public ActionResult Delete(User user)
+        public IActionResult Delete(Rental rental)
         {
-            var result = _userService.Delete(user);
+            var result = _rentalService.Delete(rental);
             if (result.Success)
+            {
                 return Ok(result);
+            }
             return BadRequest(result);
         }
-
     }
 }

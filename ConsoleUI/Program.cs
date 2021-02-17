@@ -29,6 +29,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
             //carManager.Add(new Car { BrandId = 7, ColorId = 4, CarName = "Skoda Octavia", DailyPrice = 180, ModelYear = 2019, Description = "Duz Vites" });
 
@@ -63,6 +64,8 @@ namespace ConsoleUI
             //{
             //    Console.WriteLine(detail.CarName + " / " +detail.BrandName + " / " +detail.ColorName + " / " +detail.DailyPrice);
             //}
+
+            var Result = rentalManager.Delete(new Rental { CarId = 1, CustomerId = 4, RentDate = new DateTime(2021, 1, 20, 10, 30, 00), ReturnDate = new DateTime(2021, 2, 1, 15, 00, 00) });
         }
     }
 }
